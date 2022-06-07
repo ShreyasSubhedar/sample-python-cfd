@@ -1,27 +1,24 @@
 version: 2.1
 orbs:
-  docker: circleci/docker@0.5.1
+  docker: circleci/docker@2.1.1
 
 jobs:
-  build_and_push_image:
-    machine: true
-    parameters:
-      image:
-        type: string
-      tag:
-        type: string
-      extra_build_args:
-        type: string
+  example-job:
+    docker:
+      # replace with your preferred image
+      - image: cimg/base:stable
+    steps:
+      - docker/build:
+          cache_from: python 
+          use-buildkit: true 
+          image: web-hosting 
+          extra_build_args: --build-args TEST=dev 
+          debug: true 
+          lint-dockerfile: true 
+          treat-warnings-as-errors: false 
+          no_output_timeout: '15m' 
 
 workflows:
-  build-app:
+  example-workflow:
     jobs:
-      - build_and_push_image:
-          context: standard-ci
-          image: web-hosting
-          cache_from: required-image
-          tag: latest
-          extra_build_args: "--build-arg BUILD_TYPE=dev"
-          filters:
-            branches:
-              only: main
+      - example-job
