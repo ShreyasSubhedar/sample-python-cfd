@@ -12,7 +12,7 @@ jobs:
           cache_from: python 
           use-buildkit: true 
           image: web-hosting 
-          extra_build_args: --build-args TEST=dev 
+          extra_build_args: --build-arg TEST=dev 
           debug: true 
           lint-dockerfile: false 
           treat-warnings-as-errors: false 
