@@ -14,7 +14,7 @@ jobs:
           image: web-hosting 
           extra_build_args: --build-args TEST=dev 
           debug: true 
-          lint-dockerfile: true 
+          lint-dockerfile: false 
           treat-warnings-as-errors: false 
           no_output_timeout: '15m' 
 
