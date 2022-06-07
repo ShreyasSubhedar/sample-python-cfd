@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  build:
+  build-and-push:
     docker:
       - image: jdrouet/docker-with-buildx:stable
     steps:
@@ -11,3 +11,10 @@ jobs:
           docker buildx build \
             --platform linux/arm/v7,linux/arm64/v8,linux/amd64 \
             --tag shreyasxo/multiarch-example:buildx-latest .
+      - run: docker login -u shreyasxo -p "$DOCKER_PASSWORD"
+      - run: |
+                docker buildx build --push \
+                  --platform linux/arm/v6,linux/arm/v7,linux/arm64/v8,linux/i386,linux/amd64
+                  --tag shreyasxo/multiarch-example:buildx-latest .
+      
+      
