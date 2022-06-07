@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  build-and-push:
+  build:
     docker:
       - image: jdrouet/docker-with-buildx:stable
     steps:
