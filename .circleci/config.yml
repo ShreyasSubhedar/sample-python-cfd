@@ -1,31 +1,10 @@
-version: 2.1
-orbs:
-  docker: circleci/docker@2.1.1
-
+version: 2
 jobs:
-  example-job1:
-      docker:
-        # replace with your preferred image
-        - image: cimg/base:stable
-      steps:
-        - docker/install-docker
-  example-job:
+  build:
     docker:
-      # replace with your preferred image
-      - image: cimg/base:stable
+      - image: docker:stable
     steps:
-      - docker/build:
-          cache_from: python 
-          use-buildkit: true 
-          image: web-hosting 
-          extra_build_args: --build-arg TEST=dev 
-          debug: true 
-          lint-dockerfile: false 
-          treat-warnings-as-errors: false 
-          no_output_timeout: '15m' 
-
-workflows:
-  example-workflow:
-    jobs:
-      - example-job1
-      - example-job
+      - checkout
+      - setup_remote_docker:
+          version: 18.09.3
+      - run: docker version
