@@ -1,3 +1,9 @@
+version: 2.1
+jobs:
+  build_server_pdfs:
+    machine: true
+    steps:
+          - checkout
 workflows:
   build-deploy:
     jobs:
