@@ -1,13 +1,38 @@
 version: 2.1
+# orbs:
+  # gcp-gcr: circleci/gcp-gcr@0.15.0
+
 jobs:
-  build_server_pdfs:
+  pre-build-env:
     machine: true
     steps:
-          - checkout
+      - checkout
+  build-and-push-image:
+    machine: true
+    steps:
+      - checkout
+
 workflows:
-  build-deploy:
+  version: 2
+  Build and Push to GCR when using Tag:
     jobs:
-      - build_server_pdfs: # << the job to conditionally run based on the filter-by-branch-name.
+      - pre-build-env:
           filters:
+            branches:
+              ignore: /.*/
             tags:
               only: /.*/
+      - build-and-push-image:
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /.*/
+
+  Build and Push to GCR:
+    jobs:
+      - pre-build-env
+      - build-and-push-image:
+          filters:
+            branches:
+              only: main
