@@ -16,10 +16,10 @@ jobs:
 
 workflows:
   Build and Push to GCR for Tag :
-    when:
-        matches:
-          pattern: "^$"
-          value: << pipeline.git.tag >>
+#     when:
+#         matches:
+#           pattern: "^$"
+#           value: << pipeline.git.tag >>
     jobs:
       - pre-build-env
           
