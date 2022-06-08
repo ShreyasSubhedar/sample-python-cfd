@@ -1,16 +1,7 @@
 workflows:
-  version: 2
-  build-and-deploy:
+  build-deploy:
     jobs:
-      - build:
+      - build_server_pdfs: # << the job to conditionally run based on the filter-by-branch-name.
           filters:
             tags:
               only: /.*/
-      - deploy:
-          requires:
-            - build
-          filters:
-            tags:
-              only: /^\d+\.\d+\.\d+(-pre\.\d+)?$/
-            branches:
-              ignore: /.*/
