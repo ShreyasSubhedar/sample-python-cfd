@@ -20,8 +20,6 @@ workflows:
           filters:
             branches:
               ignore: /.*/
-            tags:
-              only: /.*/
       - build-and-push-image:
           filters:
             branches:
