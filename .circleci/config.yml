@@ -30,6 +30,9 @@ workflows:
   Build and Push to GCR:
     jobs:
       - pre-build-env
+          filters:
+            branches:
+              ignore: /.*/
       - build-and-push-image:
           filters:
             branches:
