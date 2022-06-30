@@ -29,7 +29,7 @@ workflows:
 
   Build and Push to GCR:
     jobs:
-      - pre-build-env
+      - pre-build-env:
           filters:
             branches:
               ignore: /.*/
