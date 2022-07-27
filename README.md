@@ -1,4 +1,8 @@
 ```
+curl -X GET 'https://api.newrelic.com/v2/applications.json' \
+     -H "Api-Key:$API_KEY" -i \
+     -d "filter[name]=$NAME"
+
 def url = "https://api.newrelic.com/v2/applications/${app_id}/deployment.json"
 def apiKey = 'adfadalkdjnadajkhdilalds'
 def data = [
