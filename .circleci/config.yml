@@ -44,7 +44,7 @@ workflows:
       - gcp-gcr/build-and-push-image:
           context: standard-ci
           attach-workspace: true 
-          workspace-root: target/demo.jar
+          workspace-root: .
           use-docker-layer-caching: true
           google-project-id: GOOGLE_APP
           google-compute-zone: GOOGLE_COMPUTE_ZONE
