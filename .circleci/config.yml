@@ -21,9 +21,9 @@ jobs:
           cd target
           touch demo.jar
       - persist_to_workspace:
-          root: .
+          root: ./target
           paths:
-            - target/demo.jar
+            - demo.jar
 #   my-second-job:
 #     executor: my-custom-executor
 #     steps:
@@ -44,7 +44,7 @@ workflows:
       - gcp-gcr/build-and-push-image:
           context: standard-ci
           attach-workspace: true 
-          workspace-root: .
+          workspace-root: ./target
           use-docker-layer-caching: true
           google-project-id: GOOGLE_APP
           google-compute-zone: GOOGLE_COMPUTE_ZONE
