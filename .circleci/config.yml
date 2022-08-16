@@ -1,4 +1,6 @@
 version: 2.1
+orbs:
+  gcp-gcr: circleci/gcp-gcr@0.15.0
 executors:
   my-custom-executor:
     docker:
@@ -39,6 +41,14 @@ workflows:
   my-custom-workflow:
     jobs:
       - my-first-job
+      - gcp-gcr/build-and-push-image:
+          context: standard-ci
+          attach-workspace: true 
+          use-docker-layer-caching: true
+          google-project-id: GOOGLE_APP
+          google-compute-zone: GOOGLE_COMPUTE_ZONE
+          gcloud-service-key: GOOGLE_SERVICE_KEY
+          image: adminui-v2
       - my-second-job:
           requires:
             - my-first-job
