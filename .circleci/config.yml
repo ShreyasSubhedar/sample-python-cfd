@@ -1,39 +1,27 @@
 version: 2.1
-# orbs:
-  # gcp-gcr: circleci/gcp-gcr@0.15.0
-
+executors:
+  my-custom-executor:
+    docker:
+      - image: cimg/base:stable
+        auth:
+          # ensure you have first added these secrets
+          # visit app.circleci.com/settings/project/github/ShreyasSubhedar/sample-python-cfd/environment-variables
+          username: $DOCKER_HUB_USER
+          password: $DOCKER_PASSWORD
 jobs:
-  pre-build-env:
-    machine: true
+  my-job-name:
+
+    executor: my-custom-executor
     steps:
       - checkout
-  build-and-push-image:
-    machine: true
-    steps:
-      - checkout
+      - run: |
+          echo Hello, World!
+          mkdir target
+          cd target
+          touch demo.jar
+          
 
 workflows:
-  version: 2
-  Build and Push to GCR when using Tag:
+  my-custom-workflow:
     jobs:
-      - pre-build-env:
-          filters:
-            branches:
-              ignore: /.*/
-      - build-and-push-image:
-          filters:
-            branches:
-              ignore: /.*/
-            tags:
-              only: /.*/
-
-  Build and Push to GCR:
-    jobs:
-      - pre-build-env:
-          filters:
-            branches:
-              ignore: /.*/
-      - build-and-push-image:
-          filters:
-            branches:
-              only: main
+      - my-job-name
