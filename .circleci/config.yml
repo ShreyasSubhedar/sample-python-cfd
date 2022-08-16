@@ -51,6 +51,6 @@ workflows:
           image: adminui-v2
           requires:
             - my-first-job
-      - my-second-job:
-          requires:
-            - my-first-job
+#       - my-second-job:
+#           requires:
+#             - my-first-job
