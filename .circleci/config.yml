@@ -9,8 +9,7 @@ executors:
           username: $DOCKER_HUB_USER
           password: $DOCKER_PASSWORD
 jobs:
-  my-job-name:
-
+  my-first-job:
     executor: my-custom-executor
     steps:
       - checkout
@@ -23,9 +22,23 @@ jobs:
           root: .
           paths:
             - target/demo.jar
-          
+  my-second-job:
+    executor: my-custom-executor
+    steps:
+      - attach_workspace:
+          # Must be absolute path or relative path from working_directory
+          at: workspace/target/demo.jar
+
+      - run: |
+          ls -ltra
+          cd target
+          ls -ltra
+      
 
 workflows:
   my-custom-workflow:
     jobs:
-      - my-job-name
+      - my-first-job
+      - my-second-job:
+          requires:
+            - my-first-job
