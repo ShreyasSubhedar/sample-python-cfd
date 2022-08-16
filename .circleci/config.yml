@@ -27,7 +27,7 @@ jobs:
     steps:
       - attach_workspace:
           # Must be absolute path or relative path from working_directory
-          at: workspace/target/demo.jar
+          at: target/demo.jar
 
       - run: |
           ls -ltra
